@@ -9,8 +9,7 @@ class App extends Component {
       note: '',
       todoid: 1,
       status: '',
-      counter: 0,
-      completed:0,
+      noteslist:[]
   }
   handleChange(prop, e){
     this.setState({[prop]: e.target.value })
@@ -21,11 +20,9 @@ class App extends Component {
     prev += stat
     return prev
     },0)
-    var counter = this.state.notes
     let notes = this.state.notes.slice();
     notes.splice(i, 1);
     this.setState({
-      counter:this.state.notes.length - 1,  
       notes     
     })
   }
@@ -33,15 +30,15 @@ class App extends Component {
        var obj ={
         note: this.state.note,
         todoid: this.state.todoid,
-        status: this.state.status,
-        counter: this.state.counter + 1,   
-      }
+        status: false
+              }
       this.setState({
        notes: this.state.notes.concat(obj),
+       noteslist: this.state.notes.concat(obj),
+
        note: '',
        todoid: this.state.todoid + 1,
        status: false,
-       counter:  this.state.counter + 1 ,      
      })
   }
     handleCompleted(msg){
@@ -50,26 +47,49 @@ class App extends Component {
     if(itemSelected) item.status = !item.status
     return item
       })
-    var currentStat = this.state.notes.reduce(function(prev, next){
-    var stat = next.status ? 1 : 0
-    prev += stat
-    return prev
-    },0)
-   // var counter = this.state.notes
-    this.setState({
-        currentStat:this.state.currentStat,
-        counter:this.state.notes.length - currentStat
-      })
-     console.log("Completed Tasks:", currentStat)
-     //console.log("Counter: ",  counter)
-     // console.log("Counter:", this.state.counter)
-    // console.log(msg)
+    this.setState({ 
+    })
   }
+  handleFilter(filter){
+    const { notes, noteslist } = this.state
+    if(filter !== 'ALL'){
+     const curstat = filter === 'COMPLETE'
+     notes.filter((complete) => {
+      var news = complete.status === false
+      console.log("Filter Completed:", news)
+
+     })
+
+    }
+  }
+/*
+   handlefilterCompleted(){
+     const resultCompleted  = this.state.notes.filter(todo => todo.status === true)
+     console.log("Filter Completed:", resultCompleted)
+  }
+   
+   handlefilterActive(){
+     const resultActive  = this.state.notes.filter(todo => todo.status === false)
+     console.log("Filter Active:", resultActive)
+   }
+   handlefilterAll(){
+    const resultAll  = this.state.notes
+    console.log("Filter All:", resultAll)
+   }
+  */
   render() {
-      console.log('Todo List :', this.state.notes)
-     // console.log('Counter :', this.state.counter)
+    var counterStat = this.state.notes.reduce(function(prev, next){
+    if(next.status){
+       prev.completed++
+    }  
+    else{
+      prev.incomplete++
+    }
+    return prev
+    },{completed : 0, incomplete : 0})
+      // console.log('Counter :', this.state.counter)
       //console.log('Completed Tasks :', this.state.completed)
-    return (
+      return (
       <div className="MainFrame">
         <div className="HeaderFrame">
         </div>
@@ -79,16 +99,18 @@ class App extends Component {
                notes={this.state.notes}
                details={this.state.details}
                note={this.state.note}
-               counter={this.state.counter}
                handleCompleted={this.handleCompleted.bind(this)}
                removeTodo={this.removeTodo.bind(this, 'counter')}
                id={this.state.todoid}
                complete={this.state.complete}
-               />
+               totalcounter={counterStat}
+                handleFilter={this.handleFilter.bind(this, 'filter')}
+              />
       </div>
-   
     );
   }
 }
 
 export default App;
+
+

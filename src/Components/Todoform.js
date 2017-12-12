@@ -4,12 +4,14 @@ import '../App.css';
 
  class Todoform extends Component {
    render() {
-    const { details, notes} = this.props
-      console.log(details)
+    const { details, notes, totalcounter} = this.props
+      console.log("Number of Tasks to do:" , totalcounter.incomplete)
+      console.log(totalcounter)
+      console.log("TodoList:", notes)
       const note = notes
       .filter((note) => {
-       return details.id === note.id })
-       .map((msg,item) => 
+      return details.id === note.id })
+      .map((msg,item) => 
       <div className="Container">  
         <div className="NoteTextContainer">  
         <label style={{ textDecorationLine: msg.status ? 'line-through' : 'none', 
@@ -26,7 +28,7 @@ import '../App.css';
                  onClick={this.props.removeTodo.bind(this, item)}>Remove
         </button>
         </div>
-          </div>
+       </div>
       )
      return (
         <div className="BodyFrame">
@@ -46,13 +48,24 @@ import '../App.css';
             </div>
             <div className="NoteContainer">
                 <div className="StatusContainer">
-                   <label className="Stat">{this.props.counter} todo/s left</label>
-                   <label className="allStat">All</label>
-                   <label className="activeStat">Active</label>
-                   <label className="completedStat">Completed</label>
+                   <label className="Stat ">{totalcounter.incomplete} todo/s left</label>
+                  <button className="status allStat"
+                          onClick={this.props.handleFilter('ALL')}>All
+                  </button>
+                  <button className="status activeStat"
+                      onClick={this.props.handlefilterActive}>Active
+                  </button>
+                  <button className="status completedStat"
+                    onClick={this.props.handlefilterCompleted}>Completed
+                  </button>
                </div>
                <div className="TodoListContainer">
                   {note}
+               </div>
+               <div className="StatusContainer">
+                 <label className="completed">
+                   Completed Tasks : {totalcounter.completed}
+                 </label>
                </div>
             </div>
         </div>

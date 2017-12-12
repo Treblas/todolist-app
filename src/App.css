@@ -85,7 +85,9 @@
   font-weight:bolder;
   margin-left:70px;
   text-shadow:1px 1px 1px white;
-
+ text-decoration: none;
+    background-color: transparent;
+    border:none;
 }
 .activeStat{
    color:maroon;
@@ -95,14 +97,53 @@
   font-weight:bolder;
   margin-left:70px;
   text-shadow:1px 1px 1px white;
+   text-decoration: none;
+    background-color: transparent;
+    border:none;
 }
 .completedStat{
-     color:maroon;
+  color:maroon;
   font-size:18px;
   letter-spacing: 2px;
   font-family: Century;
   font-weight:bolder;
   margin-left:70px;
+  text-shadow:1px 1px 1px white;
+   text-decoration: none;
+    background-color: transparent;
+    border:none;
+}
+
+.completedStat:hover{
+    font-size:18px;
+  color:black;
+  text-shadow:1px 1px 1px white;
+  background-color:gray;
+  border-radius: 5px;
+}
+
+.activeStat:hover{
+font-size:18px;
+  color:black;
+  text-shadow:1px 1px 1px white;
+  background-color:gray;
+  border-radius: 5px;
+}
+
+.allStat:hover{
+  font-size:18px;
+  color:black;
+  text-shadow:1px 1px 1px white;
+  background-color:gray;
+  border-radius: 5px;
+}
+.completed{
+  color:black;
+  font-size:16px;
+  letter-spacing: 1px;
+  font-family: Century;
+  font-weight:bolder;
+  margin-left:145px; 
   text-shadow:1px 1px 1px white;
 }
 .TodoListContainer{
@@ -117,6 +158,14 @@
   opacity:0.7;
   overflow:auto;
   height:500px;
+}
+.status{
+     color:maroon;
+  font-size:18px;
+  letter-spacing: 2px;
+  font-family: Century;
+  font-weight:bolder;
+  text-shadow:1px 1px 1px white;
 }
 .NoteTextContainer{
   width:200px;
