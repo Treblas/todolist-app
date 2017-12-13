@@ -5,7 +5,7 @@ import '../App.css';
  class Todoform extends Component {
    render() {
     const { details, notes, totalcounter} = this.props
-      console.log("Number of Tasks to do:" , totalcounter.incomplete)
+      //console.log("Number of Tasks to do:" , totalcounter.incomplete)
       console.log(totalcounter)
       console.log("TodoList:", notes)
       const note = notes
@@ -50,13 +50,13 @@ import '../App.css';
                 <div className="StatusContainer">
                    <label className="Stat ">{totalcounter.incomplete} todo/s left</label>
                   <button className="status allStat"
-                          onClick={this.props.handleFilter('ALL')}>All
+                          onClick={this.props.handleFilter.bind(this, 'ALL')}>All
                   </button>
                   <button className="status activeStat"
-                      onClick={this.props.handlefilterActive}>Active
+                      onClick={this.props.handleFilter.bind(this, 'INCOMPLETE')}>Active
                   </button>
                   <button className="status completedStat"
-                    onClick={this.props.handlefilterCompleted}>Completed
+                    onClick={this.props.handleFilter.bind(this, 'COMPLETE')}>Completed
                   </button>
                </div>
                <div className="TodoListContainer">

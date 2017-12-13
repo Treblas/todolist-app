@@ -35,7 +35,6 @@ class App extends Component {
       this.setState({
        notes: this.state.notes.concat(obj),
        noteslist: this.state.notes.concat(obj),
-
        note: '',
        todoid: this.state.todoid + 1,
        status: false,
@@ -51,32 +50,18 @@ class App extends Component {
     })
   }
   handleFilter(filter){
-    const { notes, noteslist } = this.state
+    var {  noteslist } = this.state
+    var notes = noteslist
     if(filter !== 'ALL'){
      const curstat = filter === 'COMPLETE'
-     notes.filter((complete) => {
-      var news = complete.status === false
-      console.log("Filter Completed:", news)
-
-     })
-
+     notes = noteslist.filter((complete) => 
+     complete.status === curstat)
     }
+    this.setState({
+      notes
+    })
   }
-/*
-   handlefilterCompleted(){
-     const resultCompleted  = this.state.notes.filter(todo => todo.status === true)
-     console.log("Filter Completed:", resultCompleted)
-  }
-   
-   handlefilterActive(){
-     const resultActive  = this.state.notes.filter(todo => todo.status === false)
-     console.log("Filter Active:", resultActive)
-   }
-   handlefilterAll(){
-    const resultAll  = this.state.notes
-    console.log("Filter All:", resultAll)
-   }
-  */
+
   render() {
     var counterStat = this.state.notes.reduce(function(prev, next){
     if(next.status){
@@ -104,7 +89,7 @@ class App extends Component {
                id={this.state.todoid}
                complete={this.state.complete}
                totalcounter={counterStat}
-                handleFilter={this.handleFilter.bind(this, 'filter')}
+               handleFilter={this.handleFilter.bind(this)}
               />
       </div>
     );
